@@ -11,6 +11,7 @@ By Adem Gaygusuz
 ## Next steps
 * Add styling
 * Add more test coverage
+* Add type annotations (flow or TypeScript)
 * Add loading indicator
 * Add retry option upon failure
 * Possibly add caching, depending on business requirements
