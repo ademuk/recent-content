@@ -12,6 +12,7 @@ By Adem Gaygusuz
 * Add styling
 * Add more test coverage
 * Add type annotations (flow or TypeScript)
+* Move xhr fetch into api module
 * Add loading indicator
 * Add retry option upon failure
 * Possibly add caching, depending on business requirements
