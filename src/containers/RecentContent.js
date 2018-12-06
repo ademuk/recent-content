@@ -61,7 +61,7 @@ export default class RecentContent extends Component {
       selectedTab: tab
     });
 
-    return fetch(`${CONTENT_BASE_URL}?q=${tab.searchTerm}&api-key=${API_KEY}`)
+    return fetch(`${CONTENT_BASE_URL}?order-by=newest&q=${tab.searchTerm}&api-key=${API_KEY}`)
       .then(response => this.handleFetchComplete(response))
       .catch(err => this.setState({error: err}));
   }
