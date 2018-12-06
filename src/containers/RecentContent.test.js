@@ -6,11 +6,11 @@ import RecentContent from "./RecentContent";
 const tabs = [
   {
     title: 'UK News',
-    searchTerm: 'uk news'
+    sectionId: 'uk news'
   },
   {
     title: 'Football',
-    searchTerm: 'football'
+    sectionId: 'football'
   }
 ];
 

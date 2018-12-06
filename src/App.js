@@ -5,15 +5,15 @@ import './App.css';
 const TABS = [
   {
     title: 'UK news',
-    searchTerm: 'uk news'
+    sectionId: 'uk-news'
   },
   {
     title: 'Football',
-    searchTerm: 'football'
+    sectionId: 'football'
   },
   {
     title: 'Travel',
-    searchTerm: 'travel'
+    sectionId: 'travel'
   }
 ];
 

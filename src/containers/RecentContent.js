@@ -30,10 +30,10 @@ export default class RecentContent extends Component {
   renderTab(tab) {
     const {
       title,
-      searchTerm
+      sectionId
     } = tab;
     return (
-      <li key={searchTerm}>
+      <li key={sectionId}>
         <button
            title={title}
            className={this.state.selectedTab === tab ? "selected" : ""}
@@ -61,7 +61,7 @@ export default class RecentContent extends Component {
       selectedTab: tab
     });
 
-    return fetch(`${CONTENT_BASE_URL}?order-by=newest&q=${tab.searchTerm}&api-key=${API_KEY}`)
+    return fetch(`${CONTENT_BASE_URL}?section=${tab.sectionId}&api-key=${API_KEY}&order-by=newest`)
       .then(response => this.handleFetchComplete(response))
       .catch(err => this.setState({error: err}));
   }
