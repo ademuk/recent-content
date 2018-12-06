@@ -1,28 +1,25 @@
 import React, {Component} from 'react';
 
+import {CONTENT_BASE_URL, API_KEY} from 'config';
+
 export default class RecentContent extends Component {
   state = {
-    articles: [
-      {
-        id: 'foo',
-        webTitle: 'title',
-        webUrl: 'http://foo'
-      }
-    ]
+    articles: [],
+    selectedTab: undefined
   };
 
   componentDidMount() {
-
+    this.selectTab(this.props.tabs[0]);
   }
 
   render() {
     return (
       <div>
         <ul>
-          {this.props.tabs.map(this.renderTab)}
+          {this.props.tabs.map(tab => this.renderTab(tab))}
         </ul>
         <ol>
-          {this.state.articles.map(this.renderArticle)}
+          {this.state.articles.map(article => this.renderArticle(article))}
         </ol>
       </div>
     )
@@ -35,7 +32,11 @@ export default class RecentContent extends Component {
     } = tab;
     return (
       <li key={searchTerm}>
-        <a href="#" title={title}>{title}</a>
+        <button
+           title={title}
+           className={this.state.selectedTab === tab ? "selected" : ""}
+           onClick={this.handleTabClick.bind(this, tab)}>{title}
+         </button>
       </li>
     )
   }
@@ -51,5 +52,31 @@ export default class RecentContent extends Component {
         <a href={webUrl} title={webTitle}>{webTitle}</a>
       </li>
     )
+  }
+
+  selectTab(tab) {
+    this.setState({
+      selectedTab: tab
+    });
+
+    return fetch(`${CONTENT_BASE_URL}?q=${tab.searchTerm}&api-key=${API_KEY}`)
+      .then(response => this.handleFetchComplete(response))
+      .then(response => this.setState({articles: response.response.results}))
+      .catch(err => this.setState({error: err}));
+  }
+
+  handleTabClick(tab) {
+    this.selectTab(tab);
+  }
+
+  handleFetchComplete(response) {
+    {
+      if (response.status !== 200) {
+        this.setState({error: response.status});
+        return;
+      }
+
+      return response.json()
+    }
   }
 }
