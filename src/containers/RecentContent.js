@@ -5,7 +5,8 @@ import {CONTENT_BASE_URL, API_KEY} from 'config';
 export default class RecentContent extends Component {
   state = {
     articles: [],
-    selectedTab: undefined
+    selectedTab: undefined,
+    error: ''
   };
 
   componentDidMount() {
@@ -18,6 +19,7 @@ export default class RecentContent extends Component {
         <ul>
           {this.props.tabs.map(tab => this.renderTab(tab))}
         </ul>
+        {this.state.error && <div className="error">Error fetching content.</div>}
         <ol>
           {this.state.articles.map(article => this.renderArticle(article))}
         </ol>
@@ -61,7 +63,6 @@ export default class RecentContent extends Component {
 
     return fetch(`${CONTENT_BASE_URL}?q=${tab.searchTerm}&api-key=${API_KEY}`)
       .then(response => this.handleFetchComplete(response))
-      .then(response => this.setState({articles: response.response.results}))
       .catch(err => this.setState({error: err}));
   }
 
@@ -70,13 +71,14 @@ export default class RecentContent extends Component {
   }
 
   handleFetchComplete(response) {
-    {
-      if (response.status !== 200) {
-        this.setState({error: response.status});
-        return;
-      }
-
-      return response.json()
+    if (response.status !== 200) {
+      this.setState({error: response.status});
+      return;
     }
+
+    return response.json()
+      .then(response =>
+        this.setState({articles: response.response.results})
+      )
   }
 }
