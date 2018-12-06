@@ -9,7 +9,7 @@ By Adem Gaygusuz
 * I couldn't find `trailText` in the response but have included `webTitle`.
 
 ## Next steps
-* Add styling
+* ~~Add styling~~ - Added after the 2 hour mark! :)
 * Add more test coverage
 * Add type annotations (flow or TypeScript)
 * Move xhr fetch into api module

@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 
 import {CONTENT_BASE_URL, API_KEY} from 'config';
 
+import styles from './RecentContent.module.css';
+
 export default class RecentContent extends Component {
   state = {
     articles: [],
@@ -15,12 +17,12 @@ export default class RecentContent extends Component {
 
   render() {
     return (
-      <div>
-        <ul>
+      <div className={styles.RecentContent}>
+        <ul className={styles.tabList}>
           {this.props.tabs.map(tab => this.renderTab(tab))}
         </ul>
         {this.state.error && <div className="error">Error fetching content.</div>}
-        <ol>
+        <ol className={styles.articleList}>
           {this.state.articles.map(article => this.renderArticle(article))}
         </ol>
       </div>
@@ -36,7 +38,7 @@ export default class RecentContent extends Component {
       <li key={sectionId}>
         <button
            title={title}
-           className={this.state.selectedTab === tab ? "selected" : ""}
+           className={this.state.selectedTab === tab ? styles['selected'] : ""}
            onClick={this.handleTabClick.bind(this, tab)}>{title}
          </button>
       </li>

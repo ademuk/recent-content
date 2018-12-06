@@ -1,0 +1,38 @@
+.RecentContent {
+  border: #f4f4ee solid 1px;
+  font-family: Georgia;
+  font-size: 14px;
+}
+
+.tabList {
+  display: flex;
+  padding: 0;
+  margin: 0;
+}
+
+.tabList li {
+  list-style-type: none;
+}
+
+.tabList li button {
+  font-family: Georgia;
+  font-size: 14px;
+  border: 0;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.tabList .selected {
+  background-color: #f4f4ee;
+}
+
+.articleList {
+  padding-left: 20px;
+}
+
+.articleList a {
+  display: inline-block;
+
+  padding: 5px 5px 10px 5px;
+  border-bottom: #f4f4ee solid 1px;
+}
